@@ -36,6 +36,7 @@ class DefaultController extends Controller {
 
 			//cifrar la password
 			$pwd = hash('sha256', $password);
+			//$pwd = $password;
 			
 			if (count($validate_email) == 0 && $password != NULL) {
 				if ($getHash == NULL) {
