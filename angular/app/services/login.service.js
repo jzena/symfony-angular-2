@@ -14,14 +14,40 @@ require("rxjs/add/operator/map");
 var LoginService = (function () {
     function LoginService(_http) {
         this._http = _http;
-        //public url = "http://localhost:8080/curso-fullstack/symfony/web/app_dev.php";
-        this.url = "http://localhost/curso-fullstack/symfony/web/app_dev.php";
+        this.url = "http://localhost:8080/curso-fullstack/symfony/web/app_dev.php";
     }
     LoginService.prototype.signup = function (user_to_login) {
         var json = JSON.stringify(user_to_login);
         var params = "json=" + json;
         var headers = new http_1.Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         return this._http.post(this.url + "/login", params, { headers: headers })
+            .map(function (res) { return res.json(); });
+    };
+    LoginService.prototype.getIdentity = function () {
+        var identity = JSON.parse(localStorage.getItem('identity'));
+        if (identity != "undefined") {
+            this.identity = identity;
+        }
+        else {
+            this.identity = null;
+        }
+        return this.identity;
+    };
+    LoginService.prototype.getToken = function () {
+        var token = localStorage.getItem('token');
+        if (token != "undefined") {
+            this.token = token;
+        }
+        else {
+            this.token = null;
+        }
+        return this.token;
+    };
+    LoginService.prototype.register = function (user_to_register) {
+        var json = JSON.stringify(user_to_register);
+        var params = "json=" + json;
+        var headers = new http_1.Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        return this._http.post(this.url + "/user/new", params, { headers: headers })
             .map(function (res) { return res.json(); });
     };
     LoginService = __decorate([

@@ -8,19 +8,39 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var router_1 = require('@angular/router');
 var core_1 = require('@angular/core');
 var login_service_1 = require('./../services/login.service');
 var LoginComponent = (function () {
-    function LoginComponent(_loginService) {
+    function LoginComponent(_loginService, _route, //recibir parámetros
+        _router //redireccionar a otra página
+        ) {
         this._loginService = _loginService;
+        this._route = _route;
+        this._router = _router;
         this.titulo = "Identificate";
     }
     LoginComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this._route.params.subscribe(function (params) {
+            var logout = +params["id"]; // + convierte a entero
+            if (logout == 1) {
+                localStorage.removeItem('identity');
+                localStorage.removeItem('token');
+                _this.identity = null;
+                _this.token = null;
+                window.location.href = "/login";
+            }
+        });
         this.user = {
             "email": "",
             "password": "",
             "gethash": "false"
         };
+        var identity = this._loginService.getIdentity();
+        if (identity != null && identity.sub) {
+            this._router.navigate(["/index"]);
+        }
     };
     LoginComponent.prototype.onSubmit = function () {
         var _this = this;
@@ -45,10 +65,8 @@ var LoginComponent = (function () {
                         else {
                             if (!_this.token.status) {
                                 localStorage.setItem("token", JSON.stringify(token));
-                                var id = localStorage.getItem('identity');
-                                var tk = localStorage.getItem('token');
-                                console.log("id:" + id);
-                                console.log("tk:" + tk);
+                                // REDIRECCION
+                                window.location.href = "/";
                             }
                         }
                     }, function (error) {
@@ -74,7 +92,7 @@ var LoginComponent = (function () {
             templateUrl: 'app/view/login.html',
             providers: [login_service_1.LoginService]
         }), 
-        __metadata('design:paramtypes', [login_service_1.LoginService])
+        __metadata('design:paramtypes', [login_service_1.LoginService, router_1.ActivatedRoute, router_1.Router])
     ], LoginComponent);
     return LoginComponent;
 }());

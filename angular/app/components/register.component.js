@@ -9,16 +9,43 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var router_1 = require('@angular/router');
+var login_service_1 = require('./../services/login.service');
+var user_1 = require('./../model/user');
 var RegisterComponent = (function () {
-    function RegisterComponent() {
+    function RegisterComponent(_loginService, _route, _router) {
+        this._loginService = _loginService;
+        this._route = _route;
+        this._router = _router;
+        this.titulo = "Registro";
     }
-    RegisterComponent.prototype.ngOnInit = function () { };
+    RegisterComponent.prototype.ngOnInit = function () {
+        this.user = new user_1.User(1, "user", "", "", "", "", null);
+    };
+    RegisterComponent.prototype.onSubmit = function () {
+        var _this = this;
+        //console.log(this.user);
+        this._loginService.register(this.user).subscribe(function (response) {
+            _this.status = response.status;
+            if (_this.status != "success") {
+                _this.status = "error";
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert("Error en la petición");
+            }
+        });
+    };
     RegisterComponent = __decorate([
         core_1.Component({
             selector: 'register',
-            template: '<h1>Formulario de registro</h1>'
+            templateUrl: 'app/view/register.html',
+            directives: [router_1.ROUTER_DIRECTIVES],
+            providers: [login_service_1.LoginService]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [login_service_1.LoginService, router_1.ActivatedRoute, router_1.Router])
     ], RegisterComponent);
     return RegisterComponent;
 }());

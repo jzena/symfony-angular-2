@@ -3,6 +3,15 @@
     <h1>{{titulo}}</h1>
     <hr/>
 
+    <div class="identity-data" *ngIf="identity">
+        <div class="user-identity alert alert-success" *ngIf="identity.email">
+            Bienvenido {{identity.name}}
+        </div>
+        <div class="user-identity alert alert-danger" *ngIf="identity.data">
+            {{identity.data}}
+        </div>
+    </div>
+
     <form #loginForm="ngForm" (ngSubmit)="onSubmit()" class="col-md-4">
         <p>
             <label for="">Correo electrónico:</label>
@@ -11,7 +20,8 @@
         </p>
         <p>
             <label for="">Contraseña:</label>
-            <input #password="ngForm" ngControl="password" [(ngModel)]="user.password" type="password" class="form-control" required />
+            <input #password="ngForm" ngControl="password" [(ngModel)]="user.password" type="password" class="form-control" required
+            />
             <span *ngIf="!password.valid">la contraseña es obligatorio</span>
         </p>
         <input type="submit" value="Entrar" class="btn btn-primary" />

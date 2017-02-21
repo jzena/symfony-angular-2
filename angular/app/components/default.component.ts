@@ -1,11 +1,22 @@
 import { Component, OnInit } from '@angular/core';
+import { ROUTER_DIRECTIVES, Router, ActivatedRoute } from '@angular/router';
+import { LoginService } from './../services/login.service';
 
-@Component({    
+@Component({
     selector: 'default',
-    template: '<h1>componente por defecto</h1>'    
+    templateUrl: 'app/view/default.html',
+    directives: [ROUTER_DIRECTIVES],
+    providers : [LoginService]
 })
 export class DefaultComponent implements OnInit {
-    constructor() { }
+    public titulo = "Portada";
+    public identity;
 
-    ngOnInit() { }
+    constructor(
+        private _loginService: LoginService
+    ) { }
+
+    ngOnInit() { 
+        this.identity = this._loginService.getIdentity();
+    }
 }

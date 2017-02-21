@@ -13,6 +13,7 @@ export const routes: RouterConfig = [
     },
     { path: 'index', component: DefaultComponent },
     { path: 'login', component: LoginComponent },
+    { path: 'login/:id', component: LoginComponent },
     { path: 'register', component: RegisterComponent }
 ];
 export const APP_ROUTER_PROVIDERS = [

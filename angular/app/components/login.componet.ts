@@ -1,3 +1,4 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from './../services/login.service';
 
@@ -14,15 +15,35 @@ export class LoginComponent implements OnInit {
     public token;
 
     constructor(
-        private _loginService: LoginService
-    ) {
-    }
+        private _loginService: LoginService,
+        private _route: ActivatedRoute,//recibir parámetros
+        private _router: Router//redireccionar a otra página
+    ) { }
 
     ngOnInit() {
+
+        this._route.params.subscribe(params => {
+            let logout = +params["id"];// + convierte a entero
+            if (logout == 1) {
+                localStorage.removeItem('identity');
+                localStorage.removeItem('token');
+                this.identity = null;
+                this.token = null;
+
+                window.location.href = "/login";
+                //this._router.navigate(["/index"]);
+            }
+        });
+
         this.user = {
             "email": "",
             "password": "",
             "gethash": "false"
+        };
+
+        let identity = this._loginService.getIdentity();
+        if (identity != null && identity.sub) {
+            this._router.navigate(["/index"]);
         }
     }
 
@@ -54,12 +75,8 @@ export class LoginComponent implements OnInit {
                                     if (!this.token.status) {
                                         localStorage.setItem("token", JSON.stringify(token));
 
-                                        let id = localStorage.getItem('identity');
-                                        let tk = localStorage.getItem('token');
-                                        console.log("id:" + id);
-                                        console.log("tk:" + tk);
-
-
+                                        // REDIRECCION
+                                        window.location.href = "/";
                                     }
                                 }
                             },

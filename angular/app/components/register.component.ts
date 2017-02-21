@@ -1,11 +1,49 @@
-import { Component, OnInit } from '@angular/core';
 
-@Component({    
+import { Component, OnInit } from '@angular/core';
+import { ROUTER_DIRECTIVES, ActivatedRoute, Router } from '@angular/router';
+
+import { LoginService } from './../services/login.service';
+import { User } from './../model/user';
+
+@Component({
     selector: 'register',
-    template: '<h1>Formulario de registro</h1>'    
+    templateUrl: 'app/view/register.html',
+    directives: [ROUTER_DIRECTIVES],
+    providers: [LoginService]
 })
 export class RegisterComponent implements OnInit {
-    constructor() { }
+    public titulo: string = "Registro";
+    public user: User;
+    public errorMessage;
+    public status;
 
-    ngOnInit() { }
+    constructor(
+        private _loginService: LoginService,
+        private _route: ActivatedRoute,
+        private _router: Router
+    ) { }
+
+    ngOnInit() {
+        this.user = new User(1, "user", "", "", "", "", null);
+
+    }
+
+    onSubmit() {
+        //console.log(this.user);
+        this._loginService.register(this.user).subscribe(
+            response => {
+                this.status = response.status;
+                if (this.status != "success") {
+                    this.status = "error";
+                }
+            },
+            error => {
+                this.errorMessage = <any>error;
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+        );
+    }
 }
