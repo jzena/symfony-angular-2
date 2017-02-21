@@ -1,9 +1,9 @@
-
 import { provideRouter, RouterConfig } from '@angular/router';
 
 import { DefaultComponent } from './components/default.component';
 import { RegisterComponent } from './components/register.component';
 import { LoginComponent } from './components/login.componet';
+import { UserEditComponent } from './components/user.edit.component';
 
 export const routes: RouterConfig = [
     {
@@ -14,7 +14,8 @@ export const routes: RouterConfig = [
     { path: 'index', component: DefaultComponent },
     { path: 'login', component: LoginComponent },
     { path: 'login/:id', component: LoginComponent },
-    { path: 'register', component: RegisterComponent }
+    { path: 'register', component: RegisterComponent },
+    { path: 'user-edit', component: UserEditComponent }
 ];
 export const APP_ROUTER_PROVIDERS = [
     provideRouter(routes)

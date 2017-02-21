@@ -18,5 +18,6 @@ export class DefaultComponent implements OnInit {
 
     ngOnInit() { 
         this.identity = this._loginService.getIdentity();
+        console.log(this.identity);
     }
 }

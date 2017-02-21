@@ -16,10 +16,14 @@ var login_service_1 = require('./services/login.service');
 var AppComponent = (function () {
     function AppComponent(_loginService) {
         this._loginService = _loginService;
+        this.userImage = "";
     }
     AppComponent.prototype.ngOnInit = function () {
         this.identity = this._loginService.getIdentity();
         this.token = this._loginService.getToken();
+        if (this.identity != null) {
+            this.userImage = this._loginService.urlImage + this.identity.image;
+        }
     };
     AppComponent = __decorate([
         core_1.Component({

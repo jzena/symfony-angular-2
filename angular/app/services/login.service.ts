@@ -7,7 +7,10 @@ import { Observable } from "rxjs/Observable";
 export class LoginService {
 
     public url = "http://localhost:8080/curso-fullstack/symfony/web/app_dev.php";
+    public urlImage = "http://localhost:8080/curso-fullstack/symfony/web/uploads/users/";
     //public url = "http://localhost/curso-fullstack/symfony/web/app_dev.php";
+    //public urlImage = "http://localhost:8080/curso-fullstack/symfony/web/uploads/users/";
+    
     public identity;
     public token;
 
@@ -20,6 +23,10 @@ export class LoginService {
 
         return this._http.post(this.url + "/login", params, { headers: headers })
             .map(res => res.json());
+    }
+
+    getMainURL() {
+        return this.url;
     }
 
     getIdentity() {
@@ -54,6 +61,15 @@ export class LoginService {
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 
         return this._http.post(this.url + "/user/new", params, { headers: headers })
+            .map(res => res.json());
+    }
+
+    update_user(user_to_update) {
+        let json = JSON.stringify(user_to_update);
+        let params = "json=" + json + "&authorization=" + this.getToken();
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+
+        return this._http.post(this.url + "/user/edit", params, { headers: headers })
             .map(res => res.json());
     }
 }

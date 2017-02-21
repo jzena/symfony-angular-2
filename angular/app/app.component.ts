@@ -16,6 +16,7 @@ import { LoginService } from './services/login.service';
 export class AppComponent {
     public identity;
     public token;
+    public userImage: string = "";
 
     constructor(
         private _loginService: LoginService
@@ -23,6 +24,9 @@ export class AppComponent {
 
     ngOnInit() {
         this.identity = this._loginService.getIdentity();
-        this.token = this._loginService.getToken();        
+        this.token = this._loginService.getToken();
+        if (this.identity != null) {
+            this.userImage = this._loginService.urlImage + this.identity.image;
+        }
     }
 }

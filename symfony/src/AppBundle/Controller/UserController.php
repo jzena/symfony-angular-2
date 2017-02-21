@@ -116,21 +116,22 @@ class UserController extends Controller {
 				$emailContraint->message = "this email is not valid";
 				$validate_email = $this->get("validator")->validate($email, $emailContraint);
 
-				if ($email != NULL && count($validate_email) == 0 &&
-						$name != NULL && $surname != NULL) {
+				if ($email != null && count($validate_email) == 0 &&
+						$name != null && $surname != null) {
 
 					$user->setCreatedAt($createdAt);
-					$user->setImage($image);
+					//$user->setImage($image);
 					$user->setRole($role);
 					$user->setEmail($email);
 					$user->setName($name);
 					$user->setSurname($surname);
 
-					if ($password != null) {
+					if ($password != null && !empty($password)) {
 //cifrar la password
 						$pwd = hash('sha256', $password);
 						$user->setPassword($pwd);
 					}
+
 					$em = $this->getDoctrine()->getManager();
 					$isset_user = $em->getRepository("BackendBundle:User")->findBy(
 							array(
@@ -149,17 +150,17 @@ class UserController extends Controller {
 						$data = array(
 							"status" => "error",
 							"code" => 400,
-							"msg" => "User not updated"
+							"msg" => "User not updated, duplicated"
 						);
 					}
 				}
+			} else {
+				$data = array(
+					"status" => "error",
+					"code" => 400,
+					"msg" => "Authorization not valid"
+				);
 			}
-		} else {
-			$data = array(
-				"status" => "error",
-				"code" => 400,
-				"msg" => "Authorization not valid"
-			);
 		}
 
 		return $helpers->json($data);

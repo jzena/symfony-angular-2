@@ -10,18 +10,18 @@ class Helpers {
 		$this->jwt_auth = $jwt_auth;
 	}
 
-	public function authCheck($has, $getIdentity = false) {
+	public function authCheck($hash, $getIdentity = false){
 		$jwt_auth = $this->jwt_auth;
-
-		$auth = FALSE;
-		if ($has != NULL) {
-			if ($getIdentity == false) {
-				$check_token = $jwt_auth->checkToken($has);
-				if ($check_token == TRUE) {
-					$auth = TRUE;
+		
+		$auth = false;
+		if($hash != null){
+			if($getIdentity == false){
+				$check_token = $jwt_auth->checkToken($hash);
+				if($check_token == true){
+					$auth = true;
 				}
-			} else {
-				$check_token = $jwt_auth->checkToken($has, true);
+			}else{
+				$check_token = $jwt_auth->checkToken($hash, true);
 				if(is_object($check_token)){
 					$auth = $check_token;
 				}
