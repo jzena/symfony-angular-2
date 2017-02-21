@@ -12,10 +12,10 @@ var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
 require("rxjs/add/operator/map");
 var LoginService = (function () {
-    //public url = "http://localhost/curso-fullstack/symfony/web/app_dev.php";
     function LoginService(_http) {
         this._http = _http;
-        this.url = "http://localhost:8080/curso-fullstack/symfony/web/app_dev.php";
+        //public url = "http://localhost:8080/curso-fullstack/symfony/web/app_dev.php";
+        this.url = "http://localhost/curso-fullstack/symfony/web/app_dev.php";
     }
     LoginService.prototype.signup = function (user_to_login) {
         var json = JSON.stringify(user_to_login);

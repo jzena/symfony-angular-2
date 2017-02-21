@@ -26,7 +26,40 @@ var LoginComponent = (function () {
         var _this = this;
         console.log(this.user);
         this._loginService.signup(this.user).subscribe(function (response) {
-            console.log(response);
+            var identity = response;
+            _this.identity = identity;
+            if (_this.identity.length <= 1) {
+                alert("Error en el servidor");
+            }
+            else {
+                if (!_this.identity.status) {
+                    localStorage.setItem("identity", JSON.stringify(identity));
+                    //GET TOKEN
+                    _this.user.gethash = "true";
+                    _this._loginService.signup(_this.user).subscribe(function (response) {
+                        var token = response;
+                        _this.token = token;
+                        if (_this.token.length <= 0) {
+                            alert("Error en el servidor");
+                        }
+                        else {
+                            if (!_this.token.status) {
+                                localStorage.setItem("token", JSON.stringify(token));
+                                var id = localStorage.getItem('identity');
+                                var tk = localStorage.getItem('token');
+                                console.log("id:" + id);
+                                console.log("tk:" + tk);
+                            }
+                        }
+                    }, function (error) {
+                        _this.errorMessage = error;
+                        if (_this.errorMessage != null) {
+                            console.log(_this.errorMessage);
+                            alert("Error en la petición");
+                        }
+                    });
+                }
+            }
         }, function (error) {
             _this.errorMessage = error;
             if (_this.errorMessage != null) {

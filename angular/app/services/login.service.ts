@@ -6,8 +6,8 @@ import { Observable } from "rxjs/Observable";
 @Injectable()
 export class LoginService {
 
-    public url = "http://localhost:8080/curso-fullstack/symfony/web/app_dev.php";
-    //public url = "http://localhost/curso-fullstack/symfony/web/app_dev.php";
+    //public url = "http://localhost:8080/curso-fullstack/symfony/web/app_dev.php";
+    public url = "http://localhost/curso-fullstack/symfony/web/app_dev.php";
     constructor(private _http: Http) { }
 
     signup(user_to_login) {
