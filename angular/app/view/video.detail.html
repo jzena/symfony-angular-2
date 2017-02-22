@@ -23,7 +23,8 @@
                 {{video.description}}
             </div>
         </div>
-
+        <!--Componente de comentarios-->
+        <comments *ngIf="identity"></comments>
     </div>
 
     <div class="col-md-4">
@@ -39,7 +40,7 @@
                     <h5>
                         <a [routerLink]="['/video',video.id]">{{video.title}}</a>
                     </h5>
-                    <a >{{video.user.name}} {{video.user.surname}}</a>
+                    <a>{{video.user.name}} {{video.user.surname}}</a>
                 </div>
             </li>
         </ul>
