@@ -14,10 +14,10 @@ require("rxjs/add/operator/map");
 var VideoService = (function () {
     function VideoService(_http) {
         this._http = _http;
-        //public url = "http://localhost:8080/curso-fullstack/symfony/web/app_dev.php";
-        //public urlImage = "http://localhost:8080/curso-fullstack/symfony/web/uploads/users/";
-        this.url = "http://localhost/curso-fullstack/symfony/web/app_dev.php";
-        this.urlImage = "http://localhost/curso-fullstack/symfony/web/uploads/users/";
+        this.url = "http://localhost:8080/curso-fullstack/symfony/web/app_dev.php";
+        this.urlImage = "http://localhost:8080/curso-fullstack/symfony/web/uploads/users/";
+        this.urlvideo = "http://localhost:8080/curso-fullstack/symfony/web/uploads/video_files/video_";
+        this.urlvideoimage = "http://localhost:8080/curso-fullstack/symfony/web/uploads/video_images/video_";
     }
     VideoService.prototype.create = function (token, video) {
         var json = JSON.stringify(video);
@@ -25,6 +25,12 @@ var VideoService = (function () {
         var headers = new http_1.Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         return this._http.post(this.url + "/video/new", params, { headers: headers })
             .map(function (res) { return res.json(); });
+    };
+    VideoService.prototype.getVideo = function (id) {
+        return this._http.get(this.url + "/video/detail/" + id).map(function (res) { return res.json(); });
+    };
+    VideoService.prototype.getLastVideos = function () {
+        return this._http.get(this.url + "/video/lasts-videos").map(function (res) { return res.json(); });
     };
     VideoService = __decorate([
         core_1.Injectable(), 

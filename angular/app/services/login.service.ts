@@ -6,10 +6,10 @@ import { Observable } from "rxjs/Observable";
 @Injectable()
 export class LoginService {
 
-    //public url = "http://localhost:8080/curso-fullstack/symfony/web/app_dev.php";
-    //public urlImage = "http://localhost:8080/curso-fullstack/symfony/web/uploads/users/";
-    public url = "http://localhost/curso-fullstack/symfony/web/app_dev.php";
-    public urlImage = "http://localhost/curso-fullstack/symfony/web/uploads/users/";
+    public url = "http://localhost:8080/curso-fullstack/symfony/web/app_dev.php";
+    public urlImage = "http://localhost:8080/curso-fullstack/symfony/web/uploads/users/";
+    //public url = "http://localhost/curso-fullstack/symfony/web/app_dev.php";
+    //public urlImage = "http://localhost/curso-fullstack/symfony/web/uploads/users/";
     
     public identity;
     public token;
