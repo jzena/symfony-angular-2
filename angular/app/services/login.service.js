@@ -14,8 +14,10 @@ require("rxjs/add/operator/map");
 var LoginService = (function () {
     function LoginService(_http) {
         this._http = _http;
-        this.url = "http://localhost:8080/curso-fullstack/symfony/web/app_dev.php";
-        this.urlImage = "http://localhost:8080/curso-fullstack/symfony/web/uploads/users/";
+        //public url = "http://localhost:8080/curso-fullstack/symfony/web/app_dev.php";
+        //public urlImage = "http://localhost:8080/curso-fullstack/symfony/web/uploads/users/";
+        this.url = "http://localhost/curso-fullstack/symfony/web/app_dev.php";
+        this.urlImage = "http://localhost/curso-fullstack/symfony/web/uploads/users/";
     }
     LoginService.prototype.signup = function (user_to_login) {
         var json = JSON.stringify(user_to_login);
