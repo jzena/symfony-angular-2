@@ -1,6 +1,9 @@
 .main{
     margin-top: 65px;
 }
+.loader{
+    margin-bottom: 30px;
+}
 .user-image{
     width: 35px;
     height: 35px;
