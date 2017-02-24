@@ -6,14 +6,14 @@ import { Observable } from "rxjs/Observable";
 @Injectable()
 export class VideoService {
 
-    public url = "http://localhost:8080/curso-fullstack/symfony/web/app_dev.php";
-    public urlImage = "http://localhost:8080/curso-fullstack/symfony/web/uploads/users/";
-    public urlvideo = "http://localhost:8080/curso-fullstack/symfony/web/uploads/video_files/video_";
-    public urlvideoimage = "http://localhost:8080/curso-fullstack/symfony/web/uploads/video_images/video_";
-    //public url = "http://localhost/curso-fullstack/symfony/web/app_dev.php";
-    //public urlImage = "http://localhost/curso-fullstack/symfony/web/uploads/users/";
-    //public urlvideo = "http://localhost/curso-fullstack/symfony/web/uploads/video_files/video_";
-    //public urlvideoimage = "http://localhost/curso-fullstack/symfony/web/uploads/video_images/video_";
+    // public url = "http://localhost:8080/curso-fullstack/symfony/web/app_dev.php";
+    // public urlImage = "http://localhost:8080/curso-fullstack/symfony/web/uploads/users/";
+    // public urlvideo = "http://localhost:8080/curso-fullstack/symfony/web/uploads/video_files/video_";
+    // public urlvideoimage = "http://localhost:8080/curso-fullstack/symfony/web/uploads/video_images/video_";
+    public url = "http://localhost/curso-fullstack/symfony/web/app_dev.php";
+    public urlImage = "http://localhost/curso-fullstack/symfony/web/uploads/users/";
+    public urlvideo = "http://localhost/curso-fullstack/symfony/web/uploads/video_files/video_";
+    public urlvideoimage = "http://localhost/curso-fullstack/symfony/web/uploads/video_images/video_";
     public identity;
     public token;
 

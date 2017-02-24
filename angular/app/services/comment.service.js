@@ -12,10 +12,10 @@ var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
 require("rxjs/add/operator/map");
 var CommentService = (function () {
-    //public url = "http://localhost/curso-fullstack/symfony/web/app_dev.php";
     function CommentService(_http) {
         this._http = _http;
-        this.url = "http://localhost:8080/curso-fullstack/symfony/web/app_dev.php";
+        //public url = "http://localhost:8080/curso-fullstack/symfony/web/app_dev.php";
+        this.url = "http://localhost/curso-fullstack/symfony/web/app_dev.php";
     }
     CommentService.prototype.create = function (token, comment) {
         var json = JSON.stringify(comment);
@@ -26,6 +26,12 @@ var CommentService = (function () {
     };
     CommentService.prototype.getCommentsOFVideo = function (video_id) {
         return this._http.get(this.url + "/comment/list/" + video_id)
+            .map(function (res) { return res.json(); });
+    };
+    CommentService.prototype.delete = function (token, id) {
+        var params = "authorization=" + token;
+        var headers = new http_1.Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        return this._http.post(this.url + "/comment/delete/" + id, params, { headers: headers })
             .map(function (res) { return res.json(); });
     };
     CommentService = __decorate([

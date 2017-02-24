@@ -69,8 +69,8 @@ var CommentsComponent = (function () {
             else {
                 _this.commentList = response.data;
                 console.log(_this.commentList);
-                _this.loading = 'hide';
             }
+            _this.loading = 'hide';
         }, function (error) {
             _this.errorMessage = error;
             if (_this.errorMessage != null) {
@@ -80,6 +80,26 @@ var CommentsComponent = (function () {
         });
     };
     CommentsComponent.prototype.deleteComment = function (id) {
+        var _this = this;
+        var comment_panel = document.querySelector(".comment-panel-" + id);
+        if (comment_panel != null) {
+            comment_panel.style.display = "none";
+        }
+        var token = this._loginService.getToken();
+        this._commentService.delete(token, id).subscribe(function (response) {
+            _this.statusComments = response.status;
+            if (_this.statusComments != "success") {
+                _this.statusComments = "error";
+            }
+            else {
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert("Error en la petición");
+            }
+        });
     };
     CommentsComponent = __decorate([
         core_1.Component({

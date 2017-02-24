@@ -4,6 +4,10 @@
 .loader{
     margin-bottom: 30px;
 }
+.pointer
+{
+    cursor: pointer;
+}
 .user-image{
     width: 35px;
     height: 35px;
