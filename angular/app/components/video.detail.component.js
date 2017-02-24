@@ -43,7 +43,7 @@ var VideoDetailComponent = (function () {
                 _this.errorMessage = error;
                 if (_this.errorMessage != null) {
                     console.log(_this.errorMessage);
-                    alert("Error en la petición");
+                    alert("Error en la petición: getVideo(" + id.toString() + ")");
                 }
             });
             // GET LAST videos
@@ -57,16 +57,15 @@ var VideoDetailComponent = (function () {
                 _this.errorMessage = error;
                 if (_this.errorMessage != null) {
                     console.log(_this.errorMessage);
-                    alert("Error en la petición");
+                    alert("Error en la petición: getLastVideos()");
                 }
             });
         });
-        console.log("Hola desde el componente de video detail");
     };
     VideoDetailComponent.prototype.ngOnDestroy = function () {
         // Clean sub to avoid memory leak
-        this.sub.unsubscribe();
-        console.log("exit to componenet video detail");
+        //this.sub.unsubscribe();
+        //console.log("exit to componenet video detail");
     };
     VideoDetailComponent = __decorate([
         core_1.Component({

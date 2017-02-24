@@ -18,8 +18,11 @@ export class AppComponent {
     public token;
     public userImage: string = "";
 
+    public searchString: string;
+
     constructor(
-        private _loginService: LoginService
+        private _loginService: LoginService,
+        private _router: Router
     ) { }
 
     ngOnInit() {
@@ -27,6 +30,15 @@ export class AppComponent {
         this.token = this._loginService.getToken();
         if (this.identity != null) {
             this.userImage = this._loginService.urlImage + this.identity.image;
+        }
+    }
+
+    search() {
+        if (this.searchString != null) {
+            this._router.navigate(["/search", this.searchString]);
+        }
+        else {
+            this._router.navigate(["/index"]);
         }
     }
 }

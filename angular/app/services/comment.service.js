@@ -12,10 +12,10 @@ var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
 require("rxjs/add/operator/map");
 var CommentService = (function () {
+    //public url = "http://localhost/curso-fullstack/symfony/web/app_dev.php";
     function CommentService(_http) {
         this._http = _http;
-        //public url = "http://localhost:8080/curso-fullstack/symfony/web/app_dev.php";
-        this.url = "http://localhost/curso-fullstack/symfony/web/app_dev.php";
+        this.url = "http://localhost:8080/curso-fullstack/symfony/web/app_dev.php";
     }
     CommentService.prototype.create = function (token, comment) {
         var json = JSON.stringify(comment);

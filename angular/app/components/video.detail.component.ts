@@ -56,7 +56,7 @@ export class VideoDetailComponent implements OnInit {
                     this.errorMessage = <any>error;
                     if (this.errorMessage != null) {
                         console.log(this.errorMessage);
-                        alert("Error en la petición");
+                        alert("Error en la petición: getVideo(" + id.toString() + ")");
                     }
                 }
             );
@@ -75,18 +75,16 @@ export class VideoDetailComponent implements OnInit {
                     this.errorMessage = <any>error;
                     if (this.errorMessage != null) {
                         console.log(this.errorMessage);
-                        alert("Error en la petición");
+                        alert("Error en la petición: getLastVideos()");
                     }
                 }
             );
         });
-
-        console.log("Hola desde el componente de video detail");
     }
 
     ngOnDestroy() {
         // Clean sub to avoid memory leak
-        this.sub.unsubscribe();
-        console.log("exit to componenet video detail");
+        //this.sub.unsubscribe();
+        //console.log("exit to componenet video detail");
     }
 }

@@ -14,8 +14,9 @@ var router_1 = require('@angular/router');
 var login_service_1 = require('./services/login.service');
 // Decorador component, indicamos en que etiqueta se va a cargar la plantilla
 var AppComponent = (function () {
-    function AppComponent(_loginService) {
+    function AppComponent(_loginService, _router) {
         this._loginService = _loginService;
+        this._router = _router;
         this.userImage = "";
     }
     AppComponent.prototype.ngOnInit = function () {
@@ -25,6 +26,14 @@ var AppComponent = (function () {
             this.userImage = this._loginService.urlImage + this.identity.image;
         }
     };
+    AppComponent.prototype.search = function () {
+        if (this.searchString != null) {
+            this._router.navigate(["/search", this.searchString]);
+        }
+        else {
+            this._router.navigate(["/index"]);
+        }
+    };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
@@ -32,7 +41,7 @@ var AppComponent = (function () {
             directives: [router_1.ROUTER_DIRECTIVES],
             providers: [login_service_1.LoginService]
         }), 
-        __metadata('design:paramtypes', [login_service_1.LoginService])
+        __metadata('design:paramtypes', [login_service_1.LoginService, router_1.Router])
     ], AppComponent);
     return AppComponent;
 }());
