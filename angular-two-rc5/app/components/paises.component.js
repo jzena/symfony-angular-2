@@ -9,16 +9,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var paises_service_1 = require('./../services/paises.service');
 var PaisesComponent = (function () {
-    function PaisesComponent() {
+    function PaisesComponent(_paisesService) {
+        var _this = this;
+        this._paisesService = _paisesService;
+        this._paisesService.getPosts().subscribe(function (result) {
+            _this.posts = result;
+            if (_this.posts.length >= 1) {
+                console.log(_this.posts);
+            }
+        }, function (error) {
+            console.log(error);
+        });
     }
-    PaisesComponent.prototype.ngOnInit = function () { };
+    PaisesComponent.prototype.ngOnInit = function () {
+    };
     PaisesComponent = __decorate([
         core_1.Component({
             selector: 'paises',
-            template: "\n      <h2>Paises</h2>\n      <ul>\n           <li>Espa\u00F1a</li>\n           <li>Mexico</li>\n           <li>Colombia</li>\n      </ul>\n          \n    "
+            template: "\n      <h2>Paises</h2>\n      <ul>\n           <li>Espa\u00F1a</li>\n           <li>Mexico</li>\n           <li>Colombia</li>\n      </ul>\n      <h2>Listado de Post</h2>\n      <ol *ngIf=\"posts\">\n        <li *ngFor=\"let post of posts\">\n           {{post.title}}\n        </li>\n      </ol>\n          \n    ",
+            providers: [paises_service_1.PaisesService]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [paises_service_1.PaisesService])
     ], PaisesComponent);
     return PaisesComponent;
 }());

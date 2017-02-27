@@ -11,12 +11,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 // Modulos
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
+var http_1 = require('@angular/http');
+var forms_1 = require('@angular/forms');
 // Config Router
 var app_routing_1 = require('./app.routing');
 // Componentes
 var app_component_1 = require('./app.component');
 var paises_component_1 = require('./components/paises.component');
 var ciudades_component_1 = require('./components/ciudades.component');
+var mi_formulario_component_1 = require('./components/mi-formulario.component');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -24,12 +27,15 @@ var AppModule = (function () {
         core_1.NgModule({
             imports: [
                 platform_browser_1.BrowserModule,
+                http_1.HttpModule,
+                forms_1.FormsModule,
                 app_routing_1.routing
             ],
             declarations: [
                 app_component_1.AppComponent,
                 paises_component_1.PaisesComponent,
-                ciudades_component_1.CiudadesComponent
+                ciudades_component_1.CiudadesComponent,
+                mi_formulario_component_1.MiFormularioComponent
             ],
             providers: [
                 app_routing_1.appRoutingProvider
